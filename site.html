@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meme Wall</title>
+    <link rel="stylesheet" href="./site.css" />
+    <script src="./main.js"></script>
+    <style>
+      .post {
+        background-color: aquamarine;
+        padding: 1rem;
+        margin: 1rem;
+        border-radius: 1rem;
+      }
+      a {
+        color: bisque;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Memes, Memes Everywhere !</h1>
+      <h3>
+        Made by
+        <a href="https://www.linkedin.com/in/harsh-ghodkar/" target="_blank"
+          >Harsh Ghodkar</a
+        >
+      </h3>
+    </header>
+    <div class="form-popup" id="myForm">
+      <form action="" class="form-container" method="POST" id="realForm">
+        <h1 style="color: white">Add a post</h1>
+
+        <label for="name"><b style="color: white">Name</b></label>
+        <input
+          type="text"
+          placeholder="Enter Name"
+          name="name"
+          id="name"
+          required
+        />
+
+        <label for="caption"><b style="color: white">Caption</b></label>
+        <input
+          type="text"
+          placeholder="Enter Caption"
+          name="caption"
+          id="caption"
+          required
+        />
+
+        <label for="url"><b style="color: white">Image URL</b></label>
+        <input
+          type="url"
+          placeholder="Enter URL"
+          name="url"
+          id="img_meme"
+          required
+        />
+        <br />
+        <button type="submit" class="btn">Post</button>
+        <button type="submit" class="btn cancel" onclick="closeForm()">
+          Close
+        </button>
+      </form>
+    </div>
+    <script>
+      const Form = document.querySelector("#realForm");
+
+      Form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        let meme = {
+          name: document.getElementById("name").value,
+          caption: document.getElementById("caption").value,
+          img_meme: document.getElementById("img_meme").value,
+        };
+
+        document.querySelector("Form").reset();
+
+        fetch("https://fastapi-backend-xmeme.herokuapp.com/memes", {
+          method: "POST",
+          redirect: "follow",
+          body: JSON.stringify(meme),
+          headers: {
+            "Content-type": "application/json",
+          },
+        })
+          .then((response) => {
+            //window.location = "http://127.0.0.1:8081/memes";
+          })
+          .catch(function (err) {
+            console.info(err);
+          });
+      });
+    </script>
+
+    <button type="submit" id="get-btn" onclick="getData()">Refresh</button>
+    <button type="submit" class="open-button" onclick="openForm()" class="btn">
+      Post
+    </button>
+    <main>
+      <section>
+        <h2>Posts</h2>
+        <div id="pics"></div>
+      </section>
+    </main>
+  </body>
+</html>
