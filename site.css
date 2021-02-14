@@ -30,7 +30,7 @@ header h1 {
 }
 /* Button used to open the contact form - fixed at the bottom of the page */
 .open-button {
-  background-color: rgb(17, 124, 143);
+  background-color: black;
   color: white;
   padding: 16px 20px;
   border-radius: 25px;
@@ -43,6 +43,11 @@ header h1 {
   bottom: 23px;
   right: 28px;
   width: 280px;
+}
+
+.open-button:hover {
+  transform: scale(1.03);
+  box-shadow: 2px 6px 10px red;
 }
 
 /* The popup form - hidden by default */
@@ -105,7 +110,7 @@ header h1 {
 }
 header {
   padding: 40px;
-  background-color: rgb(17, 124, 143);
+  background-color: #DE354C;
 }
 fieldset {
   text-align: center;
